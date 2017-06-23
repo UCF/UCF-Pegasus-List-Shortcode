@@ -9,6 +9,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			$option_defaults = array(
 				'layout'               => 'default',
 				'url'                  => 'https: //pegasus.ucf.edu/',
+				'limit'                => 5,
 				'feed_url'             => 'https: //pegasus.ucf.edu/wp-json/wp/v2/',
 				'cache_feed'           => true,
 				'transient_expiration' => 3 // hours
@@ -41,6 +42,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 
 			add_option( self::$option_prefix . 'url', $defaults['url'] );
 			add_option( self::$option_prefix . 'feed_url', $defaults['feed_url'] );
+			add_option( self::$option_prefix . 'limit', $defaults['limit'] );
 			add_option( self::$option_prefix . 'cache_feed', $defaults['cache_feed'] );
 			add_option( self::$option_prefix . 'transient_expiration', $defaults['transient_expiration'] );
 		}
@@ -54,6 +56,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 		public static function delete_option() {
 			delete_option( self::$option_prefix . 'url' );
 			delete_option( self::$option_prefix . 'feed_url' );
+			delete_option( self::$option_prefix . 'limit' );
 			delete_option( self::$option_prefix . 'cache_feed' );
 			delete_option( self::$option_prefix . 'transient_expiration' );
 		}
@@ -71,6 +74,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			$configurable_defaults = array(
 				'url'                  => get_option( self::$option_prefix . 'url', $defaults['url'] ),
 				'feed_url'             => get_option( self::$option_prefix . 'feed_url', $defaults['feed_url'] ),
+				'limit'                => get_option( self::$option_prefix . 'limit', $defaults['limit'] ),
 				'cache_feed'           => get_option( self::$option_prefix . 'cache_feed', $defaults['cache_feed'] ),
 				'transient_expiration' => get_option( self::$option_prefix . 'transient_expiration', $defaults['transient_expiration'] )
 			);
@@ -95,6 +99,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 						break;
 					case 'transient_expiration':
+					case 'limit':
 						$list[$key] = intval( $val );
 						break;
 					default:
@@ -173,6 +178,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 
 			register_setting( $setting_prefix, self::$option_prefix . 'url' );
 			register_setting( $setting_prefix, self::$option_prefix . 'feed_url' );
+			register_setting( $setting_prefix, self::$option_prefix . 'limit' );
 			register_setting( $setting_prefix, self::$option_prefix . 'cache_feed' );
 			register_setting( $setting_prefix, self::$option_prefix . 'transient_expiration' );
 
@@ -216,6 +222,19 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 					'label_for'   => self::$option_prefix . 'feed_url',
 					'description' => 'The url to the UCF Pegasus JSON API.',
 					'type'        => 'text'
+				)
+			);
+
+			add_settings_field(
+				self::$option_prefix . 'limit',
+				'Issue Display Limit (Default)',
+				array( 'UCF_Pegasus_List_Config', 'display_settings_field' ),
+				$setting_prefix,
+				$setting_prefix . '_section_general',
+				array(
+					'label_for'   => self::$option_prefix . 'limit',
+					'description' => 'The number of issues to display by default when using the shortcode.',
+					'type'        => 'number'
 				)
 			);
 

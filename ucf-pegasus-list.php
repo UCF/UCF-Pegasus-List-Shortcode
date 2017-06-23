@@ -11,6 +11,9 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 include_once 'includes/ucf-pegasus-list-config.php';
+include_once 'includes/ucf-pegasus-list-feed.php';
+include_once 'includes/ucf-pegasus-list-common.php';
+include_once 'shortcodes/ucf-pegasus-list-shortcode.php';
 
 if ( ! function_exists( 'ucf_pegasus_list_activation' ) ) {
 	function ucf_pegasus_list_activation() {
