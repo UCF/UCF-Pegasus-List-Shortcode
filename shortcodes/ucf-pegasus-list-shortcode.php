@@ -25,8 +25,8 @@ if ( ! class_exists( 'UCF_Pegasus_List_Shortcode' ) ) {
 
 			$layout = $atts['layout'];
 			$feed_url = $atts['feed_url'];
-			$limit = isset( $atts['limit'] ) ? $atts['limit'] : 5;
-			$offset = isset( $atts['offset'] ) ? $atts['offset'] : 0;
+			$limit = $atts['limit'];
+			$offset = $atts['offset'];
 
 			$args = apply_filters( 'ucf_pegasus_list_shortcode_atts_' . $layout, $atts );
 
