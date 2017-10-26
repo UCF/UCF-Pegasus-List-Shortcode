@@ -25,11 +25,12 @@ if ( ! class_exists( 'UCF_Pegasus_List_Shortcode' ) ) {
 
 			$layout = $atts['layout'];
 			$feed_url = $atts['feed_url'];
-			$limit = $atts['limit'];
+			$limit = isset( $atts['limit'] ) ? $atts['limit'] : 5;
+			$offset = isset( $atts['offset'] ) ? $atts['offset'] : 0;
 
 			$args = apply_filters( 'ucf_pegasus_list_shortcode_atts_' . $layout, $atts );
 
-			$url = $feed_url . 'issue/active?_embed&per_page=' . $limit;
+			$url = $feed_url . "issue/active?_embed&offset={$offset}&limit={$limit}";
 
 			$items = UCF_Pegasus_List_Feed::get_issues( $url );
 
