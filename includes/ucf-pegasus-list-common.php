@@ -37,7 +37,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Common' ) ) {
 
 if ( ! function_exists( 'ucf_pegasus_list_display_default_before' ) ) {
 	function ucf_pegasus_list_display_default_before( $before, $items, $args ) {
-		$title = $args['title'] ? $args['title'] : 'UCF Pegasus Issues';
+		$title = isset( $args['title'] ) ? $args['title'] : 'UCF Pegasus Issues';
 		ob_start();
 	?>
 		<div class="ucf-pegasus-list">
@@ -61,7 +61,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_content' ) ) {
 			$cover_story_subtitle = $cover_story->story_subtitle;
 			$cover_story_description = $cover_story->story_description;
 			$cover_story_blurb = null;
-			$thumbnail_id = $item->featured_image;
+			$thumbnail_id = $item->featured_media;
 			$thumbnail = null;
 			$thumbnail_url = null;
 

@@ -10,6 +10,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 				'layout'               => 'default',
 				'url'                  => 'https://pegasus.ucf.edu/',
 				'limit'                => 5,
+				'offset'               => 0,
 				'feed_url'             => 'https://pegasus.ucf.edu/wp-json/wp/v2/',
 				'cache_feed'           => true,
 				'transient_expiration' => 3 // hours
@@ -82,6 +83,8 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			// Force configurable options to override $defaults, even if they are empty:
 			$defaults = array_merge( $defaults, $configurable_defaults );
 
+			$defaults = self::format_options( $defaults );
+
 			return $defaults;
 		}
 
@@ -100,6 +103,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 						break;
 					case 'transient_expiration':
 					case 'limit':
+					case 'offset':
 						$list[$key] = intval( $val );
 						break;
 					default:
@@ -165,7 +169,11 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			$option_name = self::$option_prefix . $option_name_no_prefix;
 			$defaults = self::get_option_defaults();
 
-			return get_option( $option_name, $defaults[$option_name_no_prefix] );
+			$retval = get_option( $option_name, $defaults[$option_name_no_prefix] );
+
+			$retval = self::format_options( array( $option_name_no_prefix => $retval ) );
+
+			return $retval[$option_name_no_prefix];
 		}
 
 		/**
