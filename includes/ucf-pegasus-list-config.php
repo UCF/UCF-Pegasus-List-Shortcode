@@ -79,6 +79,8 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 				'transient_expiration' => get_option( self::$option_prefix . 'transient_expiration', $defaults['transient_expiration'] )
 			);
 
+			$configurable_defaults = self::format_options( $configurable_defaults );
+
 			// Force configurable options to override $defaults, even if they are empty:
 			$defaults = array_merge( $defaults, $configurable_defaults );
 
@@ -165,7 +167,11 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			$option_name = self::$option_prefix . $option_name_no_prefix;
 			$defaults = self::get_option_defaults();
 
-			return get_option( $option_name, $defaults[$option_name_no_prefix] );
+			$retval = get_option( $option_name, $defaults[$option_name_no_prefix] );
+
+			$retval = self::format_options( array( $option_name_no_prefix => $retval ) );
+
+			return $retval[$option_name_no_prefix];
 		}
 
 		/**
