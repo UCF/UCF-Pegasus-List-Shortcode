@@ -61,7 +61,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_content' ) ) {
 			$cover_story_subtitle = $cover_story->story_subtitle;
 			$cover_story_description = $cover_story->story_description;
 			$cover_story_blurb = null;
-			$thumbnail_id = $item->featured_media;
+			$thumbnail_id = isset( $item->featured_media ) ? $item->featured_media : 0;
 			$thumbnail = null;
 			$thumbnail_url = null;
 
