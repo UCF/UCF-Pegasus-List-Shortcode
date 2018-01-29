@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, pegasus, list, shortcode
 Requires at least: 4.7.3
 Tested up to: 4.7.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -25,6 +25,16 @@ Provides a shortcode for displaying the latest issues of Pegasus, UCF's official
 
 
 == Changelog ==
+
+= 1.0.1 =
+Enhancements:
+* Added ability to specify a fallback message when no issues are available to display (via inner shortcode contents, similarly to some of our other shortcodes). Example usage: `[ucf-pegasus-list]No results found.[/ucf-pegasus-list]`
+
+Bugfixes:
+* Fixed incorrect constant name "HOUR_IN_SECONDS", which prevented transient expiration times from being set properly.
+* Updated default feed settings to point to ucf.edu/pegasus/ instead of pegasus.ucf.edu
+* Added check in `ucf_pegasus_list_display_default_content()` to ensure `$items` is an array if it is set
+* Added additional hardening to `UCF_Pegasus_List_Feed::get_issues()` to ensure the feed response looks valid
 
 = 1.0.0 =
 * Initial release
