@@ -8,10 +8,10 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 			$option_prefix = 'ucf_pegasus_list_',
 			$option_defaults = array(
 				'layout'               => 'default',
-				'url'                  => 'https://pegasus.ucf.edu/',
+				'url'                  => 'https://www.ucf.edu/pegasus/',
 				'limit'                => 5,
 				'offset'               => 0,
-				'feed_url'             => 'https://pegasus.ucf.edu/wp-json/wp/v2/',
+				'feed_url'             => 'https://www.ucf.edu/pegasus/wp-json/wp/v2/',
 				'cache_feed'           => true,
 				'transient_expiration' => 3 // hours
 			);

@@ -20,7 +20,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Shortcode' ) ) {
 		 * @param $args Array | The shortcode atts
 		 * @return string | The pegasus list markup.
 		 **/
-		public static function callback( $atts ) {
+		public static function callback( $atts, $content='' ) {
 			$atts = shortcode_atts( UCF_Pegasus_List_Config::get_option_defaults(), $atts, 'sc_ucf_pegasus_list' );
 
 			$layout = $atts['layout'];
@@ -34,7 +34,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Shortcode' ) ) {
 
 			$items = UCF_Pegasus_List_Feed::get_issues( $url );
 
-			return UCF_Pegasus_List_Common::display_issues( $items, $layout, $args );
+			return UCF_Pegasus_List_Common::display_issues( $items, $layout, $args, $content );
 		}
 	}
 
