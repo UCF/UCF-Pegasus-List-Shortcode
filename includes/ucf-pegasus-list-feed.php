@@ -29,8 +29,8 @@ if ( ! class_exists( 'UCF_Pegasus_List_Feed' ) ) {
 					$items = false;
 				}
 
-				if ( $cache ) {
-					set_transient( $transient_name, $items, $expiration );
+				if ( $cache && $items ) {
+					set_transient( $transient_name, $items, $expiration * HOUR_IN_SECONDS );
 				}
 			}
 
