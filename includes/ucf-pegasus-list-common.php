@@ -14,29 +14,29 @@ if ( ! class_exists( 'UCF_Pegasus_List_Common' ) ) {
 		 * @param $args Array | An array of arguments for the layout
 		 * @return string | The html output
 		 **/
-		public static function display_issues( $items, $layout='default', $args=array() ) {
-			$before = '';
+		public static function display_issues( $items, $layout='default', $args=array(), $content='' ) {
+			$layout_before = '';
 			if ( has_filter( 'ucf_pegasus_list_display_' . $layout . '_before' ) ) {
-				$before = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_before', $before, $items, $args );
+				$layout_before = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_before', $layout_before, $items, $args );
 			}
 
-			$content = '';
+			$layout_content = '';
 			if ( has_filter( 'ucf_pegasus_list_display_' . $layout . '_content' ) ) {
-				$content = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_content', $content, $items, $args );
+				$layout_content = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_content', $layout_content, $items, $args, $content );
 			}
 
-			$after = '';
+			$layout_after = '';
 			if ( has_filter( 'ucf_pegasus_list_display_' . $layout . '_after' ) ) {
-				$after = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_after', $after, $items, $args );
+				$layout_after = apply_filters( 'ucf_pegasus_list_display_' . $layout . '_after', $layout_after, $items, $args );
 			}
 
-			return $before . $content . $after;
+			return $layout_before . $layout_content . $layout_after;
 		}
 	}
 }
 
 if ( ! function_exists( 'ucf_pegasus_list_display_default_before' ) ) {
-	function ucf_pegasus_list_display_default_before( $before, $items, $args ) {
+	function ucf_pegasus_list_display_default_before( $layout_before, $items, $args ) {
 		$title = isset( $args['title'] ) ? $args['title'] : 'UCF Pegasus Issues';
 		ob_start();
 	?>
@@ -50,31 +50,36 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_before' ) ) {
 }
 
 if ( ! function_exists( 'ucf_pegasus_list_display_default_content' ) ) {
-	function ucf_pegasus_list_display_default_content( $content, $items, $args ) {
+	function ucf_pegasus_list_display_default_content( $layout_content, $items, $args, $fallback_message='' ) {
+		if ( $items && ! is_array( $items ) ) { $items = array( $items ); }
+
 		ob_start();
-		foreach( $items as $item ) :
-			$issue_url   = $item->link;
-			$issue_title = $item->title->rendered;
-			$cover_story = $item->_embedded->issue_cover_story[0];
-			$cover_story_url = $cover_story->link;
-			$cover_story_title = $cover_story->title->rendered;
-			$cover_story_subtitle = $cover_story->story_subtitle;
-			$cover_story_description = $cover_story->story_description;
-			$cover_story_blurb = null;
-			$thumbnail_id = isset( $item->featured_media ) ? $item->featured_media : 0;
-			$thumbnail = null;
-			$thumbnail_url = null;
 
-			if ( $thumbnail_id !== 0 ) {
-				$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
-				$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
-			}
+		if ( $items ) :
 
-			if ( $cover_story_description ) {
-				$cover_story_blurb = $cover_story_description;
-			} else if ( $cover_story_subtitle ) {
-				$cover_story_blurb = $cover_story_subtitle;
-			}
+			foreach ( $items as $item ) :
+				$issue_url   = $item->link;
+				$issue_title = $item->title->rendered;
+				$cover_story = $item->_embedded->issue_cover_story[0];
+				$cover_story_url = $cover_story->link;
+				$cover_story_title = $cover_story->title->rendered;
+				$cover_story_subtitle = $cover_story->story_subtitle;
+				$cover_story_description = $cover_story->story_description;
+				$cover_story_blurb = null;
+				$thumbnail_id = isset( $item->featured_media ) ? $item->featured_media : 0;
+				$thumbnail = null;
+				$thumbnail_url = null;
+
+				if ( $thumbnail_id !== 0 ) {
+					$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
+					$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+				}
+
+				if ( $cover_story_description ) {
+					$cover_story_blurb = $cover_story_description;
+				} else if ( $cover_story_subtitle ) {
+					$cover_story_blurb = $cover_story_subtitle;
+				}
 	?>
 		<div class="ucf-pegasus-issue">
 		<?php if ( $thumbnail_url ) : ?>
@@ -104,16 +109,21 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_content' ) ) {
 				</a>
 			</div>
 		</div>
+		<?php endforeach; ?>
+
+	<?php else: ?>
+		<span class="ucf-pegasus-issue-error"><?php echo $fallback_message; ?></span>
+	<?php endif; ?>
+
 	<?php
-		endforeach;
 		return ob_get_clean();
 	}
 
-	add_filter( 'ucf_pegasus_list_display_default_content', 'ucf_pegasus_list_display_default_content', 10, 3 );
+	add_filter( 'ucf_pegasus_list_display_default_content', 'ucf_pegasus_list_display_default_content', 10, 4 );
 }
 
 if ( ! function_exists( 'ucf_pegasus_list_display_default_after' ) ) {
-	function ucf_pegasus_list_display_default_after( $after, $items, $args ) {
+	function ucf_pegasus_list_display_default_after( $layout_after, $items, $args ) {
 		ob_start();
 	?>
 		</div>
