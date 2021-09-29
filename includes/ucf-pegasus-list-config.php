@@ -7,6 +7,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 		public static
 			$option_prefix = 'ucf_pegasus_list_',
 			$option_defaults = array(
+				'title'                => 'UCF Pegasus Issues',
 				'layout'               => 'default',
 				'url'                  => 'https://www.ucf.edu/pegasus/',
 				'limit'                => 5,
