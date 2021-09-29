@@ -10,10 +10,17 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-include_once 'includes/ucf-pegasus-list-config.php';
-include_once 'includes/ucf-pegasus-list-feed.php';
-include_once 'includes/ucf-pegasus-list-common.php';
-include_once 'shortcodes/ucf-pegasus-list-shortcode.php';
+define( 'UCF_PEGASUS_LIST__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'includes/ucf-pegasus-list-config.php';
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'includes/ucf-pegasus-list-feed.php';
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'includes/ucf-pegasus-list-common.php';
+
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'shortcodes/ucf-pegasus-list-shortcode.php';
+
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'layouts/ucf-pegasus-list-default.php';
+
 
 if ( ! function_exists( 'ucf_pegasus_list_activation' ) ) {
 	function ucf_pegasus_list_activation() {
