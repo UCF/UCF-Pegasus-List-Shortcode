@@ -115,7 +115,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 		}
 
 		/**
-		 * Applies formatting toa single option. Intended to be passed to the 'option_{$option}' hook.
+		 * Applies formatting to a single option. Intended to be passed to the 'option_{$option}' hook.
 		 * @author Jo Dickson
 		 * @since 1.0.0
 		 * @param $value Mixed | The value to be formatted
@@ -123,7 +123,7 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 		 * @return Mixed | The formatted value
 		 **/
 		public static function format_option( $value, $option_name ) {
-			$option_formatted = self::format_options( array( $options_name => $value ) );
+			$option_formatted = self::format_options( array( $option_name => $value ) );
 			return $option_formatted[$option_name];
 		}
 
