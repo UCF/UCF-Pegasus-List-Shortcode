@@ -73,7 +73,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_content' ) ) {
 				</div>
 				<?php endif; ?>
 
-				<a class="ucf-pegasus-issue-read-link" href="<?php echo $issue_url; ?>" target="_blank">
+				<a class="ucf-pegasus-issue-read-link" href="<?php echo $cover_story_url; ?>" target="_blank">
 					Read More
 				</a>
 			</div>
