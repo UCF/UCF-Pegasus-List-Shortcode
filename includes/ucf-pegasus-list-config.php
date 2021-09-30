@@ -25,7 +25,8 @@ if ( ! class_exists( 'UCF_Pegasus_List_Config' ) ) {
 		 **/
 		public static function get_layouts() {
 			$layouts = array(
-				'default' => 'Default Layout'
+				'default' => 'Default Layout',
+				'modern'  => 'Modern News Layout'
 			);
 
 			$layouts = apply_filters( self::$option_prefix . 'get_layouts', $layouts );
