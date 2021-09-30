@@ -13,6 +13,17 @@ Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF
 
 ## Changelog ##
 
+### 1.0.2 ###
+Enhancements:
+* Upgraded gulp and added editorconfig file
+* Added absolute file includes to the plugin's main file
+* Moved layout definitions to their own folder in the repo
+
+Bug Fixes:
+* Fixed issue with the [ucf-pegasus-list]'s `title` attribute not allowing empty values to be passed to it to omit the title `<h2>` in the default layout
+* Updated the default layout's "Read More" button to link to the issue's cover story instead of the issue itself
+* Fixed a couple of typos
+
 ### 1.0.1 ###
 Enhancements:
 * Added ability to specify a fallback message when no issues are available to display (via inner shortcode contents, similarly to some of our other shortcodes). Example usage: `[ucf-pegasus-list]No results found.[/ucf-pegasus-list]`
