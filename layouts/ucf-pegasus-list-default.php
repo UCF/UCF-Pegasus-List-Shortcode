@@ -1,6 +1,6 @@
 <?php
 /**
- * Functions that define the Pegasus list classic layout
+ * Functions that define the Pegasus list default layout
  */
 
 if ( ! function_exists( 'ucf_pegasus_list_display_default_before' ) ) {

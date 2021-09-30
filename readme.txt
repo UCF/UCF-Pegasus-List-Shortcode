@@ -1,9 +1,10 @@
 === UCF Pegasus Issues List ===
 Contributors: ucfwebcom
 Tags: ucf, pegasus, list, shortcode
-Requires at least: 4.7.3
-Tested up to: 4.7.3
-Stable tag: 1.0.1
+Requires at least: 5.3
+Tested up to: 5.3
+Stable tag: 1.0.2
+Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -14,17 +15,22 @@ Provides a shortcode for displaying the latest issues of Pegasus, UCF's official
 
 Provides a shortcode for displaying the latest issues of Pegasus, UCF's official alumni magazine.
 
-== Installation ==
+== Documentation ==
 
-= Manual Installation =
-1. Upload the plugin files (unzipped) to the `/wp-content/plugins` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the "Plugins" screen in WordPress
-
-= WP CLI Installation =
-1. `$ wp plugin install --activate https://github.com/UCF/UCF-Pegasus-List-Shortcode/archive/master.zip`.  See [WP-CLI Docs](http://wp-cli.org/commands/plugin/install/) for more command options.
-
+Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF-Pegasus-List-Shortcode/wiki) for detailed information about this plugin, installation instructions, and more.
 
 == Changelog ==
+
+= 1.0.2 =
+Enhancements:
+* Upgraded gulp and added editorconfig file
+* Added absolute file includes to the plugin's main file
+* Moved layout definitions to their own folder in the repo
+
+Bug Fixes:
+* Fixed issue with the [ucf-pegasus-list]'s `title` attribute not allowing empty values to be passed to it to omit the title `<h2>` in the default layout
+* Updated the default layout's "Read More" button to link to the issue's cover story instead of the issue itself
+* Fixed a couple of typos
 
 = 1.0.1 =
 Enhancements:
@@ -45,11 +51,21 @@ Bugfixes:
 n/a
 
 
-== Installation Requirements ==
+== Development ==
 
-None
+[Enabling debug mode](https://codex.wordpress.org/Debugging_in_WordPress) in your `wp-config.php` file is recommended during development to help catch warnings and bugs.
 
+= Requirements =
+* node
+* gulp-cli
 
-== Development & Contributing ==
+= Instructions =
+1. Clone the UCF-Pegasus-List-Shortcode repo into your local development environment, within your WordPress installation's `plugins/` directory: `git clone https://github.com/UCF/UCF-Pegasus-List-Shortcode.git`
+2. `cd` into the new UCF-Pegasus-List-Shortcode directory, and run `npm install` to install required packages for development into `node_modules/` within the repo
+3. Run `gulp default` to process assets.
+4. If you haven't already done so, create a new WordPress site on your development environment to test this plugin against.
+5. Activate this plugin on your development WordPress site.
+6. Configure plugin settings from the WordPress admin under "Settings > UCF Pegasus List".
 
-NOTE: this plugin's readme.md file is automatically generated.  Please only make modifications to the readme.txt file, and make sure the `gulp readme` command has been run before committing readme changes.
+= Other Notes =
+* This plugin's README.md file is automatically generated. Please only make modifications to the README.txt file, and make sure the `gulp readme` command has been run before committing README changes.
