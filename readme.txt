@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, pegasus, list, shortcode
 Requires at least: 5.3
 Tested up to: 5.3
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
@@ -20,6 +20,17 @@ Provides a shortcode for displaying the latest issues of Pegasus, UCF's official
 Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF-Pegasus-List-Shortcode/wiki) for detailed information about this plugin, installation instructions, and more.
 
 == Changelog ==
+
+= 1.0.2 =
+Enhancements:
+* Upgraded gulp and added editorconfig file
+* Added absolute file includes to the plugin's main file
+* Moved layout definitions to their own folder in the repo
+
+Bug Fixes:
+* Fixed issue with the [ucf-pegasus-list]'s `title` attribute not allowing empty values to be passed to it to omit the title `<h2>` in the default layout
+* Updated the default layout's "Read More" button to link to the issue's cover story instead of the issue itself
+* Fixed a couple of typos
 
 = 1.0.1 =
 Enhancements:
