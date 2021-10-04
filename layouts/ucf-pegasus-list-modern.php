@@ -23,11 +23,12 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 		if ( $items && ! is_array( $items ) ) { $items = array( $items ); }
 
 		ob_start();
+?>
 
-		if ( $items ) :
+		<?php if ( $items ) : ?>
 
+			<?php
 			foreach ( $items as $item ) :
-				$issue_url   = $item->link;
 				$issue_title = $item->title->rendered;
 				$cover_story = $item->_embedded->issue_cover_story[0];
 				$cover_story_url = $cover_story->link;
@@ -37,11 +38,18 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 				$cover_story_blurb = null;
 				$thumbnail_id = isset( $item->featured_media ) ? $item->featured_media : 0;
 				$thumbnail = null;
-				$thumbnail_url = null;
+				$thumbnail_size = null;
 
 				if ( $thumbnail_id !== 0 ) {
 					$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
-					$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+					if ( isset( $thumbnail->media_details->sizes->{"frontpage-story-thumbnail"} ) ) {
+						$thumbnail_size = $thumbnail->media_details->sizes->{"frontpage-story-thumbnail"};
+					} else {
+						// Use 'medium' size as a fallback if
+						// 'frontpage-story-thumbnail' isn't available
+						// (e.g. for really old stories)
+						$thumbnail_size = $thumbnail->media_details->sizes->medium;
+					}
 				}
 
 				if ( $cover_story_description ) {
@@ -49,42 +57,40 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 				} else if ( $cover_story_subtitle ) {
 					$cover_story_blurb = $cover_story_subtitle;
 				}
-	?>
-		<div class="ucf-pegasus-issue">
-		<?php if ( $thumbnail_url ) : ?>
-			<a class="ucf-pegasus-issue-thumbnail-link" href="<?php echo $issue_url; ?>" target="_blank">
-				<img class="ucf-pegasus-issue-thumbnail" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>" title="<?php echo $issue_title; ?>">
-			</a>
-			<?php endif; ?>
-			<div class="ucf-pegasus-issue-details">
-				<a class="ucf-pegasus-issue-title" href="<?php echo $issue_url; ?>" target="_blank">
-					<?php echo wptexturize( $issue_title ); ?>
-				</a>
+			?>
+			<div class="ucf-pegasus-issue media-background-container hover-parent p-3 mb-3" style="margin-left: -1rem; margin-right: -1rem;">
+				<div class="media-background hover-child-show fade" style="background-color: rgba(204, 204, 204, .25);"></div>
 
-				<span class="ucf-pegasus-issue-featured-label">Featured Story</span>
-
-				<a class="ucf-pegasus-issue-cover-title" href="<?php echo $cover_story_url; ?>">
-					<?php echo wptexturize( $cover_story_title ); ?>
-				</a>
-
-				<?php if ( $cover_story_blurb ): ?>
-				<div class="ucf-pegasus-issue-cover-description">
-					<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
+				<div class="media">
+					<?php if ( $thumbnail_size ) : ?>
+					<div class="d-flex w-25 mr-3" style="max-width: 150px;">
+						<img src="<?php echo $thumbnail_size->source_url; ?>" class="img-fluid" alt="" width="<?php echo $thumbnail_size->width; ?>" height="<?php echo $thumbnail_size->height; ?>">
+					</div>
+					<?php endif; ?>
+					<div class="media-body">
+						<div class="mb-2 pb-1">
+							<span class="badge badge-primary">Pegasus Magazine - <?php echo wptexturize( $issue_title ); ?></span>
+						</div>
+						<a class="d-block stretched-link h5 mb-2 pb-1" href="<?php echo $cover_story_url; ?>" style="color: inherit;">
+							<?php echo wptexturize( $cover_story_title ); ?>
+						</a>
+						<?php if ( $cover_story_blurb ): ?>
+						<div class="font-size-sm">
+							<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
+						</div>
+						<?php endif; ?>
+					</div>
 				</div>
-				<?php endif; ?>
-
-				<a class="ucf-pegasus-issue-read-link" href="<?php echo $cover_story_url; ?>" target="_blank">
-					Read More
-				</a>
 			</div>
+			<?php endforeach; ?>
+
+		<?php elseif ( $fallback_message ) : ?>
+		<div class="ucf-pegasus-issue-error">
+			<?php echo $fallback_message; ?>
 		</div>
-		<?php endforeach; ?>
+		<?php endif; ?>
 
-	<?php else: ?>
-		<span class="ucf-pegasus-issue-error"><?php echo $fallback_message; ?></span>
-	<?php endif; ?>
-
-	<?php
+<?php
 		return ob_get_clean();
 	}
 
