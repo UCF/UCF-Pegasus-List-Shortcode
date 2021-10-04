@@ -20,6 +20,7 @@ include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'includes/ucf-pegasus-list-common.ph
 include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'shortcodes/ucf-pegasus-list-shortcode.php';
 
 include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'layouts/ucf-pegasus-list-default.php';
+include_once UCF_PEGASUS_LIST__PLUGIN_DIR . 'layouts/ucf-pegasus-list-modern.php';
 
 
 if ( ! function_exists( 'ucf_pegasus_list_activation' ) ) {
