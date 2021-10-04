@@ -36,21 +36,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 				$cover_story_subtitle = $cover_story->story_subtitle;
 				$cover_story_description = $cover_story->story_description;
 				$cover_story_blurb = null;
-				$thumbnail_id = isset( $item->featured_media ) ? $item->featured_media : 0;
-				$thumbnail = null;
-				$thumbnail_size = null;
-
-				if ( $thumbnail_id !== 0 ) {
-					$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
-					if ( isset( $thumbnail->media_details->sizes->{"frontpage-story-thumbnail"} ) ) {
-						$thumbnail_size = $thumbnail->media_details->sizes->{"frontpage-story-thumbnail"};
-					} else {
-						// Use 'medium' size as a fallback if
-						// 'frontpage-story-thumbnail' isn't available
-						// (e.g. for really old stories)
-						$thumbnail_size = $thumbnail->media_details->sizes->medium;
-					}
-				}
+				$thumbnail = $cover_story->story_thumbnail;
 
 				if ( $cover_story_description ) {
 					$cover_story_blurb = $cover_story_description;
@@ -62,9 +48,9 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 				<div class="media-background hover-child-show fade" style="background-color: rgba(204, 204, 204, .25);"></div>
 
 				<div class="media">
-					<?php if ( $thumbnail_size ) : ?>
+					<?php if ( $thumbnail ) : ?>
 					<div class="d-flex w-25 mr-3" style="max-width: 150px;">
-						<img src="<?php echo $thumbnail_size->source_url; ?>" class="img-fluid" alt="" width="<?php echo $thumbnail_size->width; ?>" height="<?php echo $thumbnail_size->height; ?>">
+						<img src="<?php echo $thumbnail->url; ?>" class="img-fluid" alt="" width="<?php echo $thumbnail->width; ?>" height="<?php echo $thumbnail->height; ?>">
 					</div>
 					<?php endif; ?>
 					<div class="media-body">
