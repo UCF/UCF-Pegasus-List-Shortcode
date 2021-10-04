@@ -7,7 +7,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_default_before' ) ) {
 	function ucf_pegasus_list_display_default_before( $layout_before, $items, $args ) {
 		ob_start();
 	?>
-		<div class="ucf-pegasus-list">
+		<div class="ucf-pegasus-list ucf-pegasus-list-default">
 			<?php if ( $args['title'] ) : ?>
 			<h2 class="ucf-pegasus-list-title"><?php echo $args['title']; ?></h2>
 			<?php endif; ?>
