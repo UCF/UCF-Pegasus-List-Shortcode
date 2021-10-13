@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, pegasus, list, shortcode
 Requires at least: 5.3
 Tested up to: 5.3
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
@@ -20,6 +20,10 @@ Provides a shortcode for displaying the latest issues of Pegasus, UCF's official
 Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF-Pegasus-List-Shortcode/wiki) for detailed information about this plugin, installation instructions, and more.
 
 == Changelog ==
+
+= 1.1.0 =
+Enhancements:
+* Added new "modern" layout for the [ucf-pegasus-list] shortcode, which displays the cover story for each issue in the list styles to match the UCF News Plugin's modern news layout.
 
 = 1.0.2 =
 Enhancements:
