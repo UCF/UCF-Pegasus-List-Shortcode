@@ -13,6 +13,10 @@ Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF
 
 ## Changelog ##
 
+### 1.1.1 ###
+Enhancements:
+* Updated the "modern" layout to support the Athena Framework v1.1.1+
+
 ### 1.1.0 ###
 Enhancements:
 * Added new "modern" layout for the [ucf-pegasus-list] shortcode, which displays the cover story for each issue in the list styles to match the UCF News Plugin's modern news layout.
