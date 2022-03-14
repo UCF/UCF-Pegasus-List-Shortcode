@@ -57,7 +57,7 @@ if ( ! function_exists( 'ucf_pegasus_list_display_modern_content' ) ) {
 						<div class="mb-2 pb-1">
 							<span class="badge badge-primary">Pegasus Magazine Featured Story</span>
 						</div>
-						<a class="d-block stretched-link h5 mb-2 pb-1" href="<?php echo $cover_story_url; ?>" style="color: inherit;">
+						<a class="d-block stretched-link text-decoration-none h5 mb-2 pb-1" href="<?php echo $cover_story_url; ?>" style="color: inherit;">
 							<?php echo wptexturize( $cover_story_title ); ?>
 						</a>
 						<?php if ( $cover_story_blurb ): ?>
