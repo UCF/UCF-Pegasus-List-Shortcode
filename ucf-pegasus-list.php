@@ -2,7 +2,7 @@
 /*
 Plugin Name: UCF Pegasus Issue List
 Description: Provides a shortcode for displaying the latest issues of Pegasus, UCF's official alumni magazine.
-Version: 1.1.0
+Version: 1.1.1
 Author: UCF Web Communications
 License: GPL3
 */
