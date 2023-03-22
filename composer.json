@@ -1,0 +1,8 @@
+{
+    "name": "ucf/ucf-pegasus-list-shortcode",
+    "description": "Provides a shortcode for displaying the latest issues of Pegasus, UCF's official alumni magazine.",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}

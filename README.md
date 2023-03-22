@@ -13,6 +13,10 @@ Head over to the [Pegasus List Shortcode plugin wiki](https://github.com/UCF/UCF
 
 ## Changelog ##
 
+### 1.1.2 ###
+Enhancements:
+* Added composer file.
+
 ### 1.1.1 ###
 Enhancements:
 * Updated the "modern" layout to support the Athena Framework v1.1.1+
